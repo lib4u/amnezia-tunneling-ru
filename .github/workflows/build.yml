@@ -1,0 +1,51 @@
+name: Build Amnezia Domain List
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build.yml'
+      - 'scripts/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout root repo
+        uses: actions/checkout@v4
+
+      - name: Checkout v2fly/domain-list-community
+        uses: actions/checkout@v4
+        with:
+          repository: v2fly/domain-list-community
+          path: domain-list-community
+
+      - name: Build amnezia.json
+        run: |
+          CATEGORIES="vk kinopoisk aviasales drweb wildberries rutube ozon wink 2gis kaspersky ok yandex okko avito mosmetro dzen mailru mailru-group category-travel-ru x5 category-gov-ru category-entertainment-ru category-retail-ru category-medicine-ru category-media-ru category-ecommerce-ru category-ru category-bank-ru"
+
+          python3 scripts/extract_amnezia.py domain-list-community/data "$CATEGORIES" amnezia.json
+
+      - name: Commit updated amnezia.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add amnezia.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update amnezia.json ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
+      - name: Publish to Github Releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Список российских доменов для Amnezia VPN (split tunneling)." > release.txt
+          gh release delete latest --cleanup-tag -y || true
+          gh release create "latest" amnezia.json -F release.txt -t "Amnezia RU Domain List"
