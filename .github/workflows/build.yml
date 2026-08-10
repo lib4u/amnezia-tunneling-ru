@@ -28,15 +28,16 @@ jobs:
 
       - name: Build amnezia.json
         run: |
-          CATEGORIES="vk kinopoisk aviasales drweb wildberries rutube ozon wink 2gis kaspersky ok yandex okko avito mosmetro dzen mailru mailru-group category-travel-ru x5 category-gov-ru category-entertainment-ru category-retail-ru category-medicine-ru category-media-ru category-ecommerce-ru category-ru category-bank-ru"
+          CATEGORIES="private vk kinopoisk aviasales drweb wildberries rutube ozon wink 2gis kaspersky ok yandex okko avito mosmetro dzen mailru mailru-group category-travel-ru x5 category-gov-ru category-entertainment-ru category-retail-ru category-medicine-ru category-media-ru category-ecommerce-ru category-ru category-bank-ru"
 
           python3 scripts/extract_amnezia.py domain-list-community/data "$CATEGORIES" amnezia.json
 
       - name: Build amnezia-ip.json
         run: |
-          curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/ru.txt" -o ru.txt
-          python3 scripts/extract_ip.py ru.txt amnezia-ip.json
-          rm ru.txt
+          curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/ru.txt" -o cidrs.txt
+          curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/private.txt" >> cidrs.txt
+          python3 scripts/extract_ip.py cidrs.txt amnezia-ip.json
+          rm cidrs.txt
 
       - name: Commit updated lists
         run: |

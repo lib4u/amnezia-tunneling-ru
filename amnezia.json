@@ -1,5 +1,157 @@
 [
   {
+    "hostname": "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "10.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "100.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "100.51.198.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "101.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "102.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "103.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "104.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "105.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "106.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "107.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "108.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "109.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "110.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "111.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "112.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "113.0.203.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "113.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "114.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "115.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "116.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "117.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "118.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "119.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "120.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "121.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "122.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "123.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "124.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "125.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "126.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "127.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "127.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "16.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "168.192.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "17.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "18.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "19.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "1917live.red",
     "ip": ""
   },
@@ -16,11 +168,63 @@
     "ip": ""
   },
   {
+    "hostname": "2.0.192.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "20.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "21-school.ru",
     "ip": ""
   },
   {
+    "hostname": "21.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "22.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "23.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "24.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "24h.tv",
+    "ip": ""
+  },
+  {
+    "hostname": "25.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "254.169.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "255.255.255.255.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "26.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "27.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "28.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "29.172.in-addr.arpa",
     "ip": ""
   },
   {
@@ -84,6 +288,14 @@
     "ip": ""
   },
   {
+    "hostname": "30.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "31.172.in-addr.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "3dnews.ru",
     "ip": ""
   },
@@ -108,7 +320,167 @@
     "ip": ""
   },
   {
+    "hostname": "64.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "65.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "66.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "67.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "68.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "69.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "70.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "71.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "72.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "72.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "73.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "74.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "75.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "76.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "77.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "78.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "79.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "8.b.d.0.1.0.0.2.ip6.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "8.e.f.ip6.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "80.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "81.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "82.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "83.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "84.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "85.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "86.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "87.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "88.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "89.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "9.e.f.ip6.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "90.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "91.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "92.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "93.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "94.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "95.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "96.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "97.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "98.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "99.100.in-addr.arpa",
+    "ip": ""
+  },
+  {
+    "hostname": "a.e.f.ip6.arpa",
     "ip": ""
   },
   {
@@ -636,6 +1008,10 @@
     "ip": ""
   },
   {
+    "hostname": "asusrouter.com",
+    "ip": ""
+  },
+  {
     "hostname": "at.ua",
     "ip": ""
   },
@@ -721,6 +1097,10 @@
   },
   {
     "hostname": "azbukainterneta.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "b.e.f.ip6.arpa",
     "ip": ""
   },
   {
@@ -1281,6 +1661,10 @@
   },
   {
     "hostname": "cybersport.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "d.f.ip6.arpa",
     "ip": ""
   },
   {
@@ -1860,6 +2244,10 @@
     "ip": ""
   },
   {
+    "hostname": "example",
+    "ip": ""
+  },
+  {
     "hostname": "express.ms",
     "ip": ""
   },
@@ -2280,6 +2668,14 @@
     "ip": ""
   },
   {
+    "hostname": "hiwifi.com",
+    "ip": ""
+  },
+  {
+    "hostname": "home.arpa",
+    "ip": ""
+  },
+  {
     "hostname": "homecredit.ru",
     "ip": ""
   },
@@ -2516,7 +2912,19 @@
     "ip": ""
   },
   {
+    "hostname": "instant.arubanetworks.com",
+    "ip": ""
+  },
+  {
+    "hostname": "internal",
+    "ip": ""
+  },
+  {
     "hostname": "internet.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "invalid",
     "ip": ""
   },
   {
@@ -2956,6 +3364,10 @@
     "ip": ""
   },
   {
+    "hostname": "kis.v2.scr.kaspersky-labs.com",
+    "ip": ""
+  },
+  {
     "hostname": "klinikabudzdorov.ru",
     "ip": ""
   },
@@ -3140,6 +3552,14 @@
     "ip": ""
   },
   {
+    "hostname": "lan",
+    "ip": ""
+  },
+  {
+    "hostname": "leike.cc",
+    "ip": ""
+  },
+  {
     "hostname": "lenta.com",
     "ip": ""
   },
@@ -3177,6 +3597,30 @@
   },
   {
     "hostname": "litres.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "local",
+    "ip": ""
+  },
+  {
+    "hostname": "local.adguard.org",
+    "ip": ""
+  },
+  {
+    "hostname": "localdomain",
+    "ip": ""
+  },
+  {
+    "hostname": "localhost",
+    "ip": ""
+  },
+  {
+    "hostname": "localhost.ptlogin2.qq.com",
+    "ip": ""
+  },
+  {
+    "hostname": "localhost.sec.qq.com",
     "ip": ""
   },
   {
@@ -3460,6 +3904,10 @@
     "ip": ""
   },
   {
+    "hostname": "miwifi.com",
+    "ip": ""
+  },
+  {
     "hostname": "mkb.ru",
     "ip": ""
   },
@@ -3624,6 +4072,10 @@
     "ip": ""
   },
   {
+    "hostname": "my.router",
+    "ip": ""
+  },
+  {
     "hostname": "myadx.net",
     "ip": ""
   },
@@ -3785,6 +4237,10 @@
   },
   {
     "hostname": "o3team.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "oasisauth.h3c.com",
     "ip": ""
   },
   {
@@ -4208,6 +4664,10 @@
     "ip": ""
   },
   {
+    "hostname": "peiluyou.com",
+    "ip": ""
+  },
+  {
     "hostname": "penza.ru",
     "ip": ""
   },
@@ -4221,6 +4681,10 @@
   },
   {
     "hostname": "perm.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "phicomm.me",
     "ip": ""
   },
   {
@@ -4257,6 +4721,10 @@
   },
   {
     "hostname": "playfamily.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "plex.direct",
     "ip": ""
   },
   {
@@ -4649,6 +5117,18 @@
   },
   {
     "hostname": "rostics.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "router.asus.com",
+    "ip": ""
+  },
+  {
+    "hostname": "router.ctc",
+    "ip": ""
+  },
+  {
+    "hostname": "routerlogin.com",
     "ip": ""
   },
   {
@@ -5392,6 +5872,10 @@
     "ip": ""
   },
   {
+    "hostname": "setmeup.arubanetworks.com",
+    "ip": ""
+  },
+  {
     "hostname": "sevastopol.ru",
     "ip": ""
   },
@@ -5924,6 +6408,14 @@
     "ip": ""
   },
   {
+    "hostname": "tendawifi.com",
+    "ip": ""
+  },
+  {
+    "hostname": "test",
+    "ip": ""
+  },
+  {
     "hostname": "tetrika-school.ru",
     "ip": ""
   },
@@ -6064,6 +6556,14 @@
     "ip": ""
   },
   {
+    "hostname": "tplinkwifi.net",
+    "ip": ""
+  },
+  {
+    "hostname": "tplogin.cn",
+    "ip": ""
+  },
+  {
     "hostname": "trace-flow.ru",
     "ip": ""
   },
@@ -6089,6 +6589,10 @@
   },
   {
     "hostname": "trbcdn.net",
+    "ip": ""
+  },
+  {
+    "hostname": "ts.net",
     "ip": ""
   },
   {
@@ -7064,6 +7568,18 @@
     "ip": ""
   },
   {
+    "hostname": "www.asusrouter.com",
+    "ip": ""
+  },
+  {
+    "hostname": "www.miwifi.com",
+    "ip": ""
+  },
+  {
+    "hostname": "www.routerlogin.com",
+    "ip": ""
+  },
+  {
     "hostname": "x5.ai",
     "ip": ""
   },
@@ -7745,6 +8261,10 @@
   },
   {
     "hostname": "ziraatbank.ru",
+    "ip": ""
+  },
+  {
+    "hostname": "zte.home",
     "ip": ""
   },
   {
