@@ -9,19 +9,23 @@
 
 ## 📥 Скачать
 
-**Постоянная ссылка на актуальный файл:**
+В репозитории два списка — выбирайте под свою задачу (или импортируйте оба):
+
+| Файл | Что внутри | Кому подходит |
+|---|---|---|
+| [**amnezia.json**](https://github.com/lib4u/amnezia-tunneling-ru/releases/download/latest/amnezia.json) | 1900+ доменов российских сервисов | Точечный обход: только известные RU-сервисы идут мимо VPN |
+| [**amnezia-ip.json**](https://github.com/lib4u/amnezia-tunneling-ru/releases/download/latest/amnezia-ip.json) | 12 800+ IPv4-подсетей (CIDR) — **весь российский сегмент интернета** | Максимальное покрытие: вообще любой RU-адрес идёт напрямую |
+
+**Постоянные ссылки** (файлы под ними всегда свежие, можно использовать в автоматизации):
 
 ```
 https://github.com/lib4u/amnezia-tunneling-ru/releases/download/latest/amnezia.json
+https://github.com/lib4u/amnezia-tunneling-ru/releases/download/latest/amnezia-ip.json
 ```
 
-или напрямую из репозитория:
+или напрямую из репозитория: `https://raw.githubusercontent.com/lib4u/amnezia-tunneling-ru/main/amnezia.json`
 
-```
-https://raw.githubusercontent.com/lib4u/amnezia-tunneling-ru/main/amnezia.json
-```
-
-Ссылки постоянные — файл под ними всегда свежий, можно использовать в своих скриптах и автоматизации.
+> 💡 **Почему IP-список надёжнее доменного:** по [документации Amnezia](https://docs.amnezia.org/documentation/instructions/vpn-split-tunneling/), домен из списка резолвится в IP один раз при добавлении и дальше автоматически не обновляется. CIDR-подсети работают всегда. Доменный список удобен для точечной настройки, IP-список — для режима «всё российское напрямую». На слабых устройствах большой IP-список может импортироваться заметно дольше — это нормально.
 
 ## 🚀 Зачем это нужно?
 
@@ -85,7 +89,8 @@ https://raw.githubusercontent.com/lib4u/amnezia-tunneling-ru/main/amnezia.json
 1. **Каждый день в 00:00 UTC** workflow клонирует свежую базу [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community).
 2. Скрипт [`scripts/extract_amnezia.py`](scripts/extract_amnezia.py) берёт 28 корневых российских категорий (`category-ru`, `category-bank-ru`, `category-gov-ru`, `yandex`, `vk`, `sber` и др.) и **рекурсивно разворачивает все `include:`** — получается 80 категорий.
 3. Результат конвертируется в формат Amnezia (`{"hostname": "...", "ip": ""}`), дедуплицируется и сортируется.
-4. Обновлённый `amnezia.json` коммитится в репозиторий и публикуется в релиз `latest`.
+4. Параллельно скрипт [`scripts/extract_ip.py`](scripts/extract_ip.py) скачивает полный список российских подсетей из [v2fly/geoip](https://github.com/v2fly/geoip) (`ru.txt`), отбрасывает IPv6 (Amnezia поддерживает только IPv4) и собирает `amnezia-ip.json`.
+5. Обновлённые файлы коммитятся в репозиторий и публикуются в релиз `latest`.
 
 Всё прозрачно: источник данных открыт, скрипт конвертации — 40 строк Python в этом репозитории.
 
