@@ -51,8 +51,12 @@ jobs:
 
       - name: Build amnezia-ip-lite.json
         run: |
-          python3 scripts/derive_ip.py amnezia.json cidrs.txt amnezia-ip-lite.json
-          rm cidrs.txt
+          # ip2asn нужен, чтобы расширять адрес до сети владельца: DNS находит
+          # не все эндпоинты сервиса (у Ozon — 11 префиксов из 16), а по AS
+          # они добираются целиком.
+          curl -sSL "https://iptoasn.com/data/ip2asn-v4.tsv.gz" | gunzip > ip2asn.tsv
+          python3 scripts/derive_ip.py amnezia.json cidrs.txt ip2asn.tsv amnezia-ip-lite.json
+          rm cidrs.txt ip2asn.tsv
 
       - name: Commit updated lists
         run: |
