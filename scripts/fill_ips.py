@@ -26,6 +26,8 @@ mos.ru через 77.88.8.8 — это 94.79.51.170, а через 8.8.8.8 — 2
 import ipaddress
 import json
 import sys
+import urllib.parse
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 import dns.resolver
@@ -35,8 +37,14 @@ OUT = sys.argv[2] if len(sys.argv) > 2 else SRC
 WORKERS = 128
 TIMEOUT = 4
 
-RU_DNS = ['77.88.8.8', '77.88.8.1']       # Яндекс.DNS — geo-корректные ответы
-OTHER_DNS = ['8.8.8.8', '1.1.1.1']        # страховка от троттлинга, см. ниже
+# Раннер GitHub режет исходящий UDP/53: сборка через обычные резолверы
+# получила адреса лишь у 65% доменов против 84% локально. Основа поэтому —
+# DNS-over-HTTPS, он идёт по 443 и не троттлится.
+DOH = ['https://dns.google/resolve', 'https://cloudflare-dns.com/dns-query']
+# Яндекс по UDP — best effort: DoH-эндпоинта у него нет, а geo-корректные
+# ответы нужны (mos.ru отдаёт российскому резолверу 94.79.51.x, а Google —
+# 212.11.151.x). Если UDP закрыт, список соберётся и без него.
+RU_DNS = ['77.88.8.8', '77.88.8.1']
 SAMPLES = 2                               # повторов на резолвер
 RETRIES = 2
 
@@ -50,7 +58,19 @@ def make_resolver(server):
 
 
 ru = [make_resolver(s) for s in RU_DNS]
-other = [make_resolver(s) for s in OTHER_DNS]
+
+
+def query_doh(url, hostname):
+    request = urllib.request.Request(
+        f"{url}?name={urllib.parse.quote(hostname)}&type=A",
+        headers={'Accept': 'application/dns-json'})
+    for _ in range(RETRIES):
+        try:
+            answer = json.load(urllib.request.urlopen(request, timeout=TIMEOUT))
+            return {a['data'] for a in answer.get('Answer', []) if a.get('type') == 1}
+        except Exception:
+            continue
+    return set()
 
 
 def query(resolver, hostname):
@@ -80,12 +100,12 @@ def resolve(hostname):
     for resolver in ru:
         for _ in range(SAMPLES):
             found |= query(resolver, hostname)
-    # Зарубежные резолверы опрашиваем ВСЕГДА, а не только когда российские
-    # молчат. Яндекс.DNS троттлит запросы из дата-центра GitHub, и сборка,
-    # где фоллбэк был условным, потеряла 600 доменов разом — вместе с
+    # DoH опрашиваем ВСЕГДА, а не только когда российские резолверы молчат:
+    # под троттлингом они не отвечают отказом, а висят до таймаута, и условный
+    # фоллбэк срабатывал через раз. Сборка тогда потеряла 600 доменов вместе с
     # finance.ozon.ru, а с ним и три префикса Ozon Bank.
-    for resolver in other:
-        found |= query(resolver, hostname)
+    for url in DOH:
+        found |= query_doh(url, hostname)
     # localhost/lan и перехваченный DNS дают 127.0.0.1, 0.0.0.0, серые адреса:
     # такой маршрут увёл бы loopback и локальную сеть в туннель.
     return sorted(ip for ip in found if ipaddress.ip_address(ip).is_global)
