@@ -32,12 +32,13 @@ import dns.resolver
 
 SRC = sys.argv[1]
 OUT = sys.argv[2] if len(sys.argv) > 2 else SRC
-WORKERS = 64
+WORKERS = 128
 TIMEOUT = 4
 
-RU_DNS = ['77.88.8.8', '77.88.8.1']   # Яндекс.DNS
-FALLBACK_DNS = ['8.8.8.8']            # только если российские молчат
-SAMPLES = 2                           # повторов на резолвер, см. ниже
+RU_DNS = ['77.88.8.8', '77.88.8.1']       # Яндекс.DNS — geo-корректные ответы
+OTHER_DNS = ['8.8.8.8', '1.1.1.1']        # страховка от троттлинга, см. ниже
+SAMPLES = 2                               # повторов на резолвер
+RETRIES = 2
 
 
 def make_resolver(server):
@@ -49,14 +50,18 @@ def make_resolver(server):
 
 
 ru = [make_resolver(s) for s in RU_DNS]
-fallback = [make_resolver(s) for s in FALLBACK_DNS]
+other = [make_resolver(s) for s in OTHER_DNS]
 
 
 def query(resolver, hostname):
-    try:
-        return {rr.address for rr in resolver.resolve(hostname, 'A')}
-    except Exception:
-        return set()
+    for _ in range(RETRIES):
+        try:
+            return {rr.address for rr in resolver.resolve(hostname, 'A')}
+        except dns.resolver.NXDOMAIN:
+            return set()          # домена нет — повторять незачем
+        except Exception:
+            continue              # таймаут или отказ — пробуем ещё раз
+    return set()
 
 
 def resolve(hostname):
@@ -75,9 +80,12 @@ def resolve(hostname):
     for resolver in ru:
         for _ in range(SAMPLES):
             found |= query(resolver, hostname)
-    if not found:
-        for resolver in fallback:
-            found |= query(resolver, hostname)
+    # Зарубежные резолверы опрашиваем ВСЕГДА, а не только когда российские
+    # молчат. Яндекс.DNS троттлит запросы из дата-центра GitHub, и сборка,
+    # где фоллбэк был условным, потеряла 600 доменов разом — вместе с
+    # finance.ozon.ru, а с ним и три префикса Ozon Bank.
+    for resolver in other:
+        found |= query(resolver, hostname)
     # localhost/lan и перехваченный DNS дают 127.0.0.1, 0.0.0.0, серые адреса:
     # такой маршрут увёл бы loopback и локальную сеть в туннель.
     return sorted(ip for ip in found if ipaddress.ip_address(ip).is_global)
@@ -97,5 +105,10 @@ with_ips = sum(1 for r in result if r['ips'])
 print(f"{with_ips}/{len(result)} доменов получили адреса "
       f"({sum(len(r['ips']) for r in result)} IPv4 всего)")
 
-if with_ips < len(result) * 0.5:
-    sys.exit("ошибка: адреса получены меньше чем у половины доменов")
+# Норма — около 84% (остальное мёртвые домены апстрима). Порог ловит
+# троттлинг резолверов: обеднённый список молча выкинул бы целые сети,
+# как это случилось с Ozon Bank при 54%.
+share = with_ips / len(result)
+if share < 0.75:
+    sys.exit(f"ошибка: адреса лишь у {share:.0%} доменов, ожидается ~84% — "
+             f"похоже на троттлинг DNS, список публиковать нельзя")
