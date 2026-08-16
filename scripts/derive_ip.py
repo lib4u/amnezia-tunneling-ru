@@ -46,23 +46,31 @@ def covering(ip):
     return None
 
 
-# --- резолв доменов ---------------------------------------------------------
-domains = [entry['hostname'] for entry in json.load(open(DOMAINS, encoding='utf-8'))]
-socket.setdefaulttimeout(TIMEOUT)
+# --- адреса доменов ---------------------------------------------------------
+# Берём готовые из amnezia.json: их уже проставил fill_ips.py через российские
+# DNS. Свой резолв здесь дал бы ответы geo-DNS для дата-центра сборки, а не
+# для устройства пользователя. Fallback нужен, только если файл ещё не заполнен.
+entries = json.load(open(DOMAINS, encoding='utf-8'))
+addresses = {ip for e in entries for ip in e.get('ips', []) if ip}
+ok = sum(1 for e in entries if e.get('ips'))
 
+if not addresses:
+    print("в списке нет адресов, резолвлю сам (запустите сначала fill_ips.py)",
+          file=sys.stderr)
+    socket.setdefaulttimeout(TIMEOUT)
 
-def resolve(name):
-    try:
-        return {info[4][0] for info in socket.getaddrinfo(name, None, socket.AF_INET)}
-    except OSError:
-        return set()
+    def resolve(name):
+        try:
+            return {info[4][0] for info in socket.getaddrinfo(name, None, socket.AF_INET)}
+        except OSError:
+            return set()
 
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        resolved = list(pool.map(resolve, [e['hostname'] for e in entries]))
+    addresses = set().union(*resolved) if resolved else set()
+    ok = sum(1 for r in resolved if r)
 
-with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-    resolved = list(pool.map(resolve, domains))
-
-addresses = set().union(*resolved) if resolved else set()
-ok = sum(1 for r in resolved if r)
+domains = entries
 
 # --- адрес -> покрывающий префикс (или /32 для зарубежного хостинга) --------
 # Локальные зоны из доменного списка (localhost, lan, home.arpa) и домены

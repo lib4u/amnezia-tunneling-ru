@@ -32,6 +32,14 @@ jobs:
 
           python3 scripts/extract_amnezia.py domain-list-community/data "$CATEGORIES" amnezia.json
 
+      - name: Resolve domain IPs
+        run: |
+          # Клиент Amnezia не резолвит домены при импорте списка (резолв есть
+          # только в addSite при ручном добавлении), поэтому адреса обязаны
+          # быть в файле — иначе правила не работают.
+          pip install --quiet dnspython
+          python3 scripts/fill_ips.py amnezia.json
+
       - name: Build amnezia-ip.json
         run: |
           # Только RU-подсети. private.txt сюда НЕ подмешивается: в split tunneling
