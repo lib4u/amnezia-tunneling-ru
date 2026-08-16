@@ -40,13 +40,17 @@ jobs:
           # что полностью ломает подключение.
           curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/ru.txt" -o cidrs.txt
           python3 scripts/extract_ip.py cidrs.txt amnezia-ip.json
+
+      - name: Build amnezia-ip-lite.json
+        run: |
+          python3 scripts/derive_ip.py amnezia.json cidrs.txt amnezia-ip-lite.json
           rm cidrs.txt
 
       - name: Commit updated lists
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add amnezia.json amnezia-ip.json
+          git add amnezia.json amnezia-ip.json amnezia-ip-lite.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: update domain and IP lists ($(date -u +%Y-%m-%d))"
             git push
@@ -58,4 +62,4 @@ jobs:
         run: |
           echo "Списки российских доменов и IP-подсетей для Amnezia VPN (split tunneling)." > release.txt
           gh release delete latest --cleanup-tag -y || true
-          gh release create "latest" amnezia.json amnezia-ip.json -F release.txt -t "Amnezia RU Domain & IP Lists"
+          gh release create "latest" amnezia.json amnezia-ip.json amnezia-ip-lite.json -F release.txt -t "Amnezia RU Domain & IP Lists"
