@@ -34,8 +34,11 @@ jobs:
 
       - name: Build amnezia-ip.json
         run: |
+          # Только RU-подсети. private.txt сюда НЕ подмешивается: в split tunneling
+          # список означает "гнать в VPN", и 127/8, 10/8, 192.168/16, 100.64/10,
+          # 224/3 увели бы в туннель loopback, LAN-шлюз и CGNAT-адрес клиента,
+          # что полностью ломает подключение.
           curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/ru.txt" -o cidrs.txt
-          curl -sSL "https://raw.githubusercontent.com/v2fly/geoip/release/text/private.txt" >> cidrs.txt
           python3 scripts/extract_ip.py cidrs.txt amnezia-ip.json
           rm cidrs.txt
 
